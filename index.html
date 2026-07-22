@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-Hant"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Henun 批發下單</title>
+<style>
+  html,body{height:100%;margin:0}
+  body{font-family:-apple-system,"Hiragino Sans","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:#faf9f7;color:#2b2a27;display:flex;align-items:center;justify-content:center}
+  .box{text-align:center;padding:24px}
+  .logo{font-size:26px;font-weight:800;letter-spacing:1px;margin-bottom:6px}
+  .sub{font-size:13px;color:#8a8781;margin-bottom:26px}
+  .msg{font-size:14px;color:#6d6860;margin-bottom:20px;min-height:20px}
+  .spin{width:26px;height:26px;border:3px solid #e6e2d9;border-top-color:#37352f;border-radius:50%;
+    margin:0 auto;animation:s .8s linear infinite}
+  @keyframes s{to{transform:rotate(360deg)}}
+  a{color:#37352f}
+  @media (prefers-color-scheme:dark){
+    body{background:#181715;color:#ece7dd} .sub{color:#a49d90} .msg{color:#a49d90}
+    .spin{border-color:#332f2a;border-top-color:#ece7dd} a{color:#ece7dd}
+  }
+</style></head><body>
+<div class="box">
+  <div class="logo">Henun ヘヌン</div>
+  <div class="sub">批發下單 ・ 契約零售商</div>
+  <div class="msg" id="msg">正在進入下單系統…</div>
+  <div class="spin" id="spin"></div>
+</div>
+<script>
+(async () => {
+  try {
+    // 讀當前下單網址（由 Henun 系統自動維護），繞過快取
+    const r = await fetch('./u.txt?t=' + Date.now(), { cache: 'no-store' });
+    if (!r.ok) throw new Error('fetch failed');
+    const url = (await r.text()).trim();
+    if (url && /^https:\/\/[a-z0-9.-]+/i.test(url)) {
+      location.replace(url);
+      return;
+    }
+    throw new Error('invalid url');
+  } catch (e) {
+    document.getElementById('spin').style.display = 'none';
+    document.getElementById('msg').innerHTML =
+      '下單系統目前暫時離線，請稍後重新整理本頁再試。<br>若持續無法進入，請聯絡 Henun。';
+  }
+})();
+</script>
+</body></html>
