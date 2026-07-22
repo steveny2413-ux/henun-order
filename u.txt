@@ -1,1 +1,1 @@
-https://silicon-marcus-fossil-undertake.trycloudflare.com
+https://api.trycloudflare.com
