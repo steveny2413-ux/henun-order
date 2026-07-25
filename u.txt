@@ -1,1 +1,1 @@
-https://tub-launched-suspension-analysis.trycloudflare.com
+https://api.trycloudflare.com
