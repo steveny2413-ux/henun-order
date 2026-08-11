@@ -1,1 +1,1 @@
-https://deutsche-movies-istanbul-apparent.trycloudflare.com
+https://api.trycloudflare.com
